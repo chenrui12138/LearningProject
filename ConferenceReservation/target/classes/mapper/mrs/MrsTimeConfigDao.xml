@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jcxx.saas.modules.mrs.dao.MrsTimeConfigDao">
+
+    <select id="selectAllTime" resultType="com.jcxx.saas.modules.mrs.entity.MyMeetingTimeEntity">
+        SELECT mrs_time_config.`start_time`, mrs_time_config.`end_time`
+        FROM mrs_time_config
+        WHERE meeting_room_id = #{meetingRoomId}
+          and mrs_time_config.state = 1
+    </select>
+
+    <select id="selectByMeetingRoomId" resultType="map">
+        SELECT t.start_time, t.end_time, t.meeting_room_id, r.`name`
+        FROM mrs_time_config t
+                 LEFT JOIN mrs_meeting_room r ON t.meeting_room_id = r.`id`
+        WHERE t.meeting_room_id = #{meetingRoomId}
+          AND t.state = 1
+    </select>
+</mapper>

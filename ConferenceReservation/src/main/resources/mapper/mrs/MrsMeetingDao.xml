@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jcxx.saas.modules.mrs.dao.MrsMeetingDao">
+
+    <select id="selectAllMyMeeting" resultType="com.jcxx.saas.modules.mrs.entity.MyMeetingEntity">
+        SELECT m.id, m.motif, m.date, m.end_time, m.start_time, m.state, r.address
+        FROM mrs_meeting m
+                 LEFT JOIN mrs_meeting_room r ON m.meeting_room_id = r.id
+        WHERE m.creator_id = #{creatorId}
+          and m.status = 1
+    </select>
+
+    <select id="selectMeetingDay" resultType="map">
+        SELECT m.meeting_room_id, m.start_time, m.end_time, m.motif, u.username, r.`name`
+        FROM mrs_meeting m
+                 LEFT JOIN sys_user u ON m.creator_id = u.user_id
+                 LEFT JOIN mrs_meeting_room r ON m.`meeting_room_id` = r.`id`
+        WHERE m.meeting_room_id = #{meetingRoomId}
+          AND m.date = #{date}
+          and m.status = 1
+    </select>
+
+    <select id="selectOneDayMeeting" resultType="com.jcxx.saas.modules.mrs.entity.MyMeetingTimeEntity">
+        SELECT mrs_meeting.`start_time`, mrs_meeting.`end_time`
+        FROM mrs_meeting
+        WHERE meeting_room_id = #{meetingRoomId}
+          AND mrs_meeting.date = #{date}
+          and mrs_meeting.status = 1
+    </select>
+
+    <select id="selectByMeetingRoomId" resultType="map">
+        select m.*,r.name
+        from mrs_meeting m
+        left join mrs_meeting_room r on m.meeting_room_id = r.id
+        where m.meeting_room_id = #{meetingRoomId}
+          and m.date = #{date}
+          and m.status = 1
+    </select>
+
+</mapper>
