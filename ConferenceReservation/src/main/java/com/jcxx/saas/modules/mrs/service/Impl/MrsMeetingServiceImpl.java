@@ -68,7 +68,7 @@ public class MrsMeetingServiceImpl extends ServiceImpl<MrsMeetingDao, MrsMeeting
         for (int i = 0; i < (myMeetingEntities.size() - 1); i++) {
             for (int x = 0; x < (myMeetingEntities.size() - i - 1); x++) {
                 if (Long.parseLong(myMeetingEntities.get(x).getDate().replace("-", "") + myMeetingEntities.get(x).getStartTime().replace(":", "")) >
-                        Long.parseLong(myMeetingEntities.get(x + 1).getDate().replace("-", "")+myMeetingEntities.get(x + 1).getStartTime().replace(":", ""))) {
+                        Long.parseLong(myMeetingEntities.get(x + 1).getDate().replace("-", "") + myMeetingEntities.get(x + 1).getStartTime().replace(":", ""))) {
                     hashMap = myMeetingEntities.get(x);
                     myMeetingEntities.set(x, myMeetingEntities.get(x + 1));
                     myMeetingEntities.set(x + 1, hashMap);
@@ -432,7 +432,7 @@ public class MrsMeetingServiceImpl extends ServiceImpl<MrsMeetingDao, MrsMeeting
         UserMeetingVO userMeetingVO = baseMapper.selectByMeetingId(id);
         try {
             String path = userMeetingVO.getParticipant();
-            String[] split = path.split("#",2);
+            String[] split = path.split("#", 2);
             FileInputStream fileInputStream = new FileInputStream(new File(path));
             ServletOutputStream outputStream = response.getOutputStream();
 
@@ -471,8 +471,8 @@ public class MrsMeetingServiceImpl extends ServiceImpl<MrsMeetingDao, MrsMeeting
     @Override
     public boolean deleteFile(String path) {
         File file = new File(path);
-        if(file.exists()){
-            if(file.isFile()){
+        if (file.exists()) {
+            if (file.isFile()) {
                 return file.delete();
             }
         }

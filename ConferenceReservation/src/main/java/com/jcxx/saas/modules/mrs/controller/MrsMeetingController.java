@@ -140,7 +140,6 @@ public class MrsMeetingController {
      */
     @PostMapping("/excelUpload")
     public Result excelUpload(MultipartFile file) {
-
         if (!file.isEmpty()) {
             String s = meetingService.excelUpload(file);
             return s.equals("") ? Result.error("文件上传错误") : Result.ok().put("path", s);
@@ -334,7 +333,7 @@ public class MrsMeetingController {
     }
 
     /**
-     *wll 删除文件
+     * wll 删除文件
      *
      * @return
      */
@@ -347,7 +346,7 @@ public class MrsMeetingController {
             UserMeetingVO userMeetingVO = meetingService.selectByMeetingId(meetingId);
             userMeetingVO.setParticipant("");
             meetingService.updateMeetingById(userMeetingVO);
-        }catch (Exception e){
+        } catch (Exception e) {
             boolean b = meetingService.deleteFile(newPath);
             return b == true ? Result.ok() : Result.error("文件不存在");
         }
