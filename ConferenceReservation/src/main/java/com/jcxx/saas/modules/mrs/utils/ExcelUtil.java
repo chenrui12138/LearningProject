@@ -9,13 +9,13 @@ import org.apache.poi.ss.usermodel.Workbook;
 import java.util.List;
 
 /**
- *将对象写入Excel
+ * 将对象写入Excel
  */
 public class ExcelUtil {
     public static Workbook fillExcelWithTemplate(List<MrsMeetingRoomEntity> meetingRoomEntities) {
         HSSFWorkbook wb = new HSSFWorkbook();
         //取得模板的第一个sheet页
-        HSSFSheet sheet =  wb.createSheet("会议室");
+        HSSFSheet sheet = wb.createSheet("会议室");
         sheet.setDefaultColumnWidth(35);
         //拿到sheet页有多少列
 //            int cellNum = sheet.getRow(0).getLastCellNum();
@@ -35,13 +35,13 @@ public class ExcelUtil {
             row.createCell(2).setCellValue(roomEntity.getSeat());
             row.createCell(3).setCellValue(roomEntity.getEquipment());
             String state = null;
-            if(roomEntity.getState() == 1){
+            if (roomEntity.getState() == 1) {
                 state = "正常";
             }
-            if(roomEntity.getState() == 2){
+            if (roomEntity.getState() == 2) {
                 state = "维修";
             }
-            if(roomEntity.getState() == 3){
+            if (roomEntity.getState() == 3) {
                 state = "报废";
             }
             row.createCell(4).setCellValue(state);
