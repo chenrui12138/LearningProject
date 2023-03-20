@@ -30,9 +30,9 @@
     </select>
 
     <select id="selectByMeetingRoomId" resultType="map">
-        select m.*,r.name
+        select m.*, r.name
         from mrs_meeting m
-        left join mrs_meeting_room r on m.meeting_room_id = r.id
+                 left join mrs_meeting_room r on m.meeting_room_id = r.id
         where m.meeting_room_id = #{meetingRoomId}
           and m.date = #{date}
           and m.status = 1
